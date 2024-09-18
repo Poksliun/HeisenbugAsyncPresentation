@@ -12,7 +12,7 @@ from src.http_client import (
     UserProperty
 )
 
-MANY_TEST_COUNT = 100
+MANY_TEST_COUNT: int = 100
 
 
 def create_random_number() -> int:
@@ -20,10 +20,10 @@ def create_random_number() -> int:
 
 
 class TestUsers:
-    WRITE_END_POINT = '/write'
-    MIN_AGE = 20
-    MAX_AGE = 40
-    PROPERTY_TYPE = 'flat'
+    WRITE_END_POINT: str = '/write'
+    MIN_AGE: int = 20
+    MAX_AGE: int = 40
+    PROPERTY_TYPE: int = 'flat'
 
     @pytest.mark.parametrize('iterator', list(range(0, MANY_TEST_COUNT)))
     @pytest.mark.asyncio_cooperative
@@ -36,8 +36,8 @@ class TestUsers:
             session
     ):
         # Arrange
-        name: str = f'test_{create_random_number():0>4}'
-        age: int = random.randint(self.MIN_AGE, self.MAX_AGE)
+        name = f'test_{create_random_number():0>4}'
+        age = random.randint(self.MIN_AGE, self.MAX_AGE)
         data = UserProperty(name=name, age=age, property_type=self.PROPERTY_TYPE)
         client = HttpClient(domain)
         # Act

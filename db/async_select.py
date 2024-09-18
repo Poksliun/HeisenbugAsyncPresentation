@@ -27,7 +27,7 @@ async def async_get_user(
         f'select * from users where id=:id',
         {'id': id_}
     )
-    result = await db_data.fetchone()
+    result: Optional[aiosqlite.Row] = await db_data.fetchone()
     await asyncio.sleep(SLEEP_TIME)
     return result
 
@@ -42,7 +42,7 @@ async def async_get_user_property(
         conn_obj: Объект, у которого есть метод execute, способный обращаться к базе данных
         id_: Число или строка идентификатор пользователя в базе данных
     """
-    db_data = await conn_obj.execute(
+    db_data: aiosqlite.Cursor = await conn_obj.execute(
         f'select * from property where user_id=:id order by user_id',
         {'id': id_}
     )

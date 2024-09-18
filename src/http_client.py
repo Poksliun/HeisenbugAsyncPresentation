@@ -15,7 +15,7 @@ class HttpClient:
     """Http клиент для отправки запросов на сервер
     """
 
-    def __init__(self, domain: str, _delay: int = 1):
+    def __init__(self, domain: str, _delay: int = 0):
         self._domain: str = domain
         self._delay: int = _delay
 

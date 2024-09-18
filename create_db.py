@@ -12,7 +12,7 @@
 import sqlite3
 
 
-def create_users_table(con: sqlite3.Connection):
+def create_users_table(con: sqlite3.Connection) -> None:
     """Создает таблицу users
         Args:
             con: SQLite database connection object.
@@ -28,7 +28,7 @@ def create_users_table(con: sqlite3.Connection):
     con.commit()
 
 
-def create_property_table(con: sqlite3.Connection):
+def create_property_table(con: sqlite3.Connection) -> None:
     """Создает таблицу property
         Args:
             con: SQLite database connection object.
@@ -48,7 +48,7 @@ def check_table(con: sqlite3.Connection) -> bool:
         Args:
             con: SQLite database connection object.
     """
-    res = con.execute(
+    res: int = con.execute(
         """SELECT count(name)
             FROM sqlite_master
             WHERE name in ('users', 'property');"""
