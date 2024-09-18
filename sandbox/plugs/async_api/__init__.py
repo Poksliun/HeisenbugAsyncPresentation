@@ -1,2 +1,2 @@
-from .db_ import DataBase
-from .req_ import HttpClient
+from .db_ import AsyncDataBase
+from .req_ import AsyncHttpClient
