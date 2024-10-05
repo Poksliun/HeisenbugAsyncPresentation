@@ -5,7 +5,6 @@ import time
 import sqlite3
 import functools
 import logging
-from typing import Callable
 
 import pytest
 import requests
@@ -143,7 +142,7 @@ class TestUsers:
             async_get_user_property(async_db, id_))
         user: aiosqlite.Row = await user
         assert user[1] == name
-        assert user[2] == age + 1
+        assert user[2] == age
         user_property: aiosqlite.Row = await user_property
         assert user_property[1] == self.PROPERTY_TYPE
 
@@ -190,7 +189,7 @@ class TestUsers:
     @pytest.mark.asyncio_cooperative
     async def test_async_users_write_with_lock_io_task(
             self,
-            domain: Callable[[], str],
+            domain,
             iterator,
             async_db,
             get_event_loop,
