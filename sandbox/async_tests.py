@@ -22,7 +22,9 @@ async def first_test() -> bool:
     get_res: dict = await client.get('/get/req')
     db_data: dict = await db.select('select * from ...')
     # Assert
-    assert True
+    assert post_res
+    assert get_res
+    assert db_data
     print('First test finished')
     return True
 
@@ -76,7 +78,7 @@ async def many_tests_without_locking_main():
     """Входная точка для запуска асинхронных тестов с использованием задач
     c возможностью корректирования количества запускаемых тестов
     """
-    test_count: int = 20
+    test_count: int = 80
     tests: list[Callable[[], Coroutine]] = [first_test for _ in range(test_count)]
     tasks: list[asyncio.Task] = [asyncio.create_task(test()) for test in tests]
     print('Start test run')
@@ -91,6 +93,6 @@ async def many_tests_without_locking_main():
 
 
 if __name__ == '__main__':
-    # asyncio.run(main_with_locking())
+    asyncio.run(main_with_locking())
     # asyncio.run(main_without_locking())
-    asyncio.run(many_tests_without_locking_main())
+    # asyncio.run(many_tests_without_locking_main())
