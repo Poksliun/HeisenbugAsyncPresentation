@@ -22,7 +22,8 @@ def sync_db() -> sqlite3.Connection:
     Закрывает подключение после выполнения теста в котором была вызвана
     """
     dir_name: str = os.path.dirname(__file__)
-    connection: sqlite3.Connection = sqlite3.connect(f'{dir_name}/users_data.db', )
+    connection: sqlite3.Connection = sqlite3.connect(f'{dir_name}/users_data.db',
+                                                     check_same_thread=False)
     yield connection
     connection.close()
 
